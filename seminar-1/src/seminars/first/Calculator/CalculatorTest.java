@@ -1,8 +1,7 @@
 package seminars.first.Calculator;
 
-import seminars.first.Calculator.Calculator;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
     public static void main(String[] args) {
@@ -73,5 +72,21 @@ public class CalculatorTest {
         // }
         //   assert 0 == seminars.first.Calculator.Calculator.calculation(2, 6, '+');
         //    assertThat(seminars.first.Calculator.Calculator.calculation(2, 6, '+')).isEqualTo(0);
+
+        // Incorrect purchaseAmount
+        assertThatThrownBy(
+                () -> seminars.first.Calculator.Calculator.calculatingDiscount(0, 1)
+        ).isInstanceOf(ArithmeticException.class);
+        // Incorrect discountAmount
+        assertThatThrownBy(
+                () -> seminars.first.Calculator.Calculator.calculatingDiscount(1, 0)
+        ).isInstanceOf(ArithmeticException.class);
+
+        assertThat(seminars.first.Calculator.Calculator.calculatingDiscount(100, 10)
+        ).isEqualTo(90);
+
+        assertThat(seminars.first.Calculator.Calculator.calculatingDiscount(101, 10)
+        ).isNotEqualTo(90);
     }
+
 }
